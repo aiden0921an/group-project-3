@@ -1,30 +1,31 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import AppProvider from './utils/AppProvider';
-import { Header, ProtectedRoute } from './components';
+import { Header, ProtectedRoute, Sidebar } from './components';
 import { HomePage, AuthPage, Logout, PrivatePage } from './pages/'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
-export default function App(){
-
+export default function App() {
   return (
     <AppProvider>
       <BrowserRouter>
         <Header />
-        <div className="container pt-5">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/auth" element={<AuthPage />} />
-
-            <Route path="/private" element={
-              <ProtectedRoute>
-                <PrivatePage />
-              </ProtectedRoute>
-            }/>
-
-            <Route path="/logout" element={<Logout />} />
-          </Routes>
+        <div className="main-container">
+          <Sidebar />
+          <div className="content-container">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/auth" element={<AuthPage />} />
+              <Route path="/private" element={
+                <ProtectedRoute>
+                  <PrivatePage />
+                </ProtectedRoute>
+              }/>
+              <Route path="/logout" element={<Logout />} />
+            </Routes>
+          </div>
         </div>
       </BrowserRouter>
     </AppProvider>
-  )
+  );
 }
