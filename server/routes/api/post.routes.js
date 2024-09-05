@@ -1,12 +1,15 @@
 const router = require('express').Router();
+const multer = require('multer')
+const upload = multer({ dest: 'uploads/' })
+const Model = Post;
 
 // Import any controllers needed here
-const { getAllSamples, getSampleById, createSample, updateSampleById, deleteSampleById } = require('../../controllers/sample.controller');
+const { getAllPosts, getPostById, createPost, updatePostById, deletePostById, addAddress } = require('../../controllers/post.controller');
 
 // Declare the routes that point to the controllers above
 router.get("/", async (req, res) => {
   try {
-    const payload = await getAllSamples()
+    const payload = await getAllPosts()
     res.status(200).json({ result: "success", payload })
   } catch(err){
     res.status(500).json({ result: "error", payload: err.message })
@@ -15,16 +18,17 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
-    const payload = await getSampleById(req.params.id)
+    const payload = await getPostById(req.params.id)
     res.status(200).json({ result: "success", payload })
   } catch(err){
     res.status(500).json({ result: "error", payload: err.message })
   }
 })
 
-router.post("/", async (req, res) => {
+router.post("/post", upload.single('postImage'), async (req, res) => {
+  console.log(req.file)
   try {
-    const payload = await createSample(req.body)
+    const payload = await createPost(req.body)
     res.status(200).json({ result: "success", payload })
   } catch(err){
     res.status(500).json({ result: "error", payload: err.message })
@@ -33,7 +37,16 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try {
-    const payload = await updateSampleById(req.params.id, req.body)
+    const payload = await updatePostById(req.params.id, req.body)
+    res.status(200).json({ result: "success", payload })
+  } catch(err){
+    res.status(500).json({ result: "error", payload: err.message })
+  }
+})
+
+router.put("/:id", async (req, res) => {
+  try {
+    const payload = await addAddress(req.params.id, req.body)
     res.status(200).json({ result: "success", payload })
   } catch(err){
     res.status(500).json({ result: "error", payload: err.message })
@@ -42,7 +55,7 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   try {
-    const payload = await deleteSampleById(req.params.id)
+    const payload = await deletePostById(req.params.id)
     res.status(200).json({ result: "success", payload })
   } catch(err){
     res.status(500).json({ result: "error", payload: err.message })

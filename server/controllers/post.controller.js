@@ -1,7 +1,7 @@
-const { Sample } = require('../models');
+const { Post } = require('../models');
 const multer = require('multer')
-const upload = multer({dest: '/uploads/'})
-const Model = Sample; 
+const upload = multer({ dest: '/uploads/' })
+const Model = Post;
 
 async function getAllItems() {
   try {
@@ -47,10 +47,24 @@ async function deleteItemById(id) {
   }
 }
 
+async function addAddress(id, body) {
+
+  try {
+    return await Post.findOneAndUpdate(
+      { _id: id },
+      { $addToSet: { address: body } },
+      { runValidators: true, new: true }
+    );
+  }  catch (err) {
+    throw new Error(err)
+  }
+}
+
 module.exports = {
-  getAllSamples: getAllItems,
-  getSampleById: getItemById,
-  createSample: createItem,
-  updateSampleById: updateItemById,
-  deleteSampleById: deleteItemById
+  getAllPosts: getAllItems,
+  getPostById: getItemById,
+  createPost: createItem,
+  updatePostById: updateItemById,
+  deletePostById: deleteItemById,
+  addAddress
 }

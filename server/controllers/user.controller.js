@@ -44,24 +44,24 @@ async function authenticate(data){
 }
 
 
-async function getAllItems() {
+async function getAllUsers() {
   try {
-    return await Model.find();
+    return await Model.find().populate('Post');
   } catch (err) {
     throw new Error(err)
   }
 }
 
-async function getItemById(id) {
+async function getUserById(id) {
   try {
-    return await Model.findById(id);
+    return await Model.findById(id).populate('Post');
   } catch (err) {
     throw new Error(err)
   }
 }
 
 // use this as our signup handler
-async function createItem(data) {
+async function createUser(data) {
   try {
     return await Model.create(data);
   } catch (err) {
@@ -69,19 +69,19 @@ async function createItem(data) {
   }
 }
 
-async function updateItemById(id, data) {
-  try {
-    return await Model.findByIdAndUpdate(
-      id,
-      data,
-      { new: true }
-    );
-  } catch (err) {
-    throw new Error(err)
-  }
-}
+// async function updateItemById(id, data) {
+//   try {
+//     return await Model.findByIdAndUpdate(
+//       id,
+//       data,
+//       { new: true }
+//     );
+//   } catch (err) {
+//     throw new Error(err)
+//   }
+// }
 
-async function deleteItemById(id) {
+async function deleteUserById(id) {
   try {
     return await Model.findByIdAndDelete(id);
   } catch (err) {
@@ -90,11 +90,11 @@ async function deleteItemById(id) {
 }
 
 module.exports = {
-  getAllUsers: getAllItems,
-  getUserById: getItemById,
-  createUser: createItem,
-  updateUserById: updateItemById,
-  deleteUserById: deleteItemById,
+  getAllUsers,
+  getUserById,
+  createUser,
+  // updateUserById,
+  deleteUserById,
   authenticate,
   verifyUser
 }

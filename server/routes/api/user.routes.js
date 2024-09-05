@@ -7,7 +7,7 @@ const {
   getAllUsers, 
   getUserById, 
   createUser, 
-  updateUserById, 
+  // updateUserById, 
   deleteUserById, 
   authenticate, 
   verifyUser 
@@ -32,7 +32,7 @@ function createToken(email, id){
 }
 
 // Declare the routes that point to the controllers above
-router.get("/", async (req, res) => {
+router.get("/users", async (req, res) => {
   try {
     const payload = await getAllUsers()
     res.status(200).json({ result: "success", payload })
@@ -54,7 +54,7 @@ router.get("/verify", async (req, res) => {
 })
 
 
-router.get("/:id", async (req, res) => {
+router.get("/users/:id", async (req, res) => {
   try {
     const user = await getUserById(req.params.id)
     const payload = stripPassword(user)
@@ -64,7 +64,7 @@ router.get("/:id", async (req, res) => {
   }
 })
 
-router.post("/", async (req, res) => {
+router.post("/users", async (req, res) => {
   try {
     const user = await createUser(req.body)
     const token = createToken(user.email, user._id)
@@ -86,17 +86,17 @@ router.post("/auth", async (req, res) => {
   }
 })
 
-router.put("/:id", async (req, res) => {
-  try {
-    const user = await updateUserById(req.params.id, req.body)
-    const payload = stripPassword(user)
-    res.status(200).json({ result: "success", payload })
-  } catch(err){
-    res.status(500).json({ result: "error", payload: err.message })
-  }
-})
+// router.put("/:id", async (req, res) => {
+//   try {
+//     const user = await updateUserById(req.params.id, req.body)
+//     const payload = stripPassword(user)
+//     res.status(200).json({ result: "success", payload })
+//   } catch(err){
+//     res.status(500).json({ result: "error", payload: err.message })
+//   }
+// })
 
-router.delete("/:id", async (req, res) => {
+router.delete("/users/:id", async (req, res) => {
   try {
     const payload = await deleteUserById(req.params.id)
     res.status(200).json({ result: "success", payload })
