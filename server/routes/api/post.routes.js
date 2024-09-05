@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const multer = require('multer')
 const upload = multer({ dest: 'uploads/' })
-const Model = Post;
 
 // Import any controllers needed here
 const { getAllPosts, getPostById, createPost, updatePostById, deletePostById, addAddress } = require('../../controllers/post.controller');
@@ -25,7 +24,7 @@ router.get("/:id", async (req, res) => {
   }
 })
 
-router.post("/post", upload.single('postImage'), async (req, res) => {
+router.post("/", upload.single('postImage'), async (req, res) => {
   console.log(req.file)
   try {
     const payload = await createPost(req.body)
