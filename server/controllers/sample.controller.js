@@ -1,6 +1,6 @@
 const { Sample } = require('../models');
 const multer = require('multer')
-const upload = multer({dest: '/uploads/'})
+// const upload = multer({dest: '/uploads/'})
 const Model = Sample; 
 
 async function getAllItems() {
