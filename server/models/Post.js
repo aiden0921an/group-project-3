@@ -1,5 +1,10 @@
 const { Schema, model } = require('mongoose');
-const locationSchema = require('./Location')
+const locationSchema = new Schema({
+  street: {type: String, required: true},
+  city: { type: String, required: true },
+  state: { type: String, required: true },
+  zip: {type: Number, required: true },
+});
 
 const postSchema = new Schema({
   title: {
@@ -29,8 +34,9 @@ const postSchema = new Schema({
     type: Number,
     required: true
   },
-  username: {
-    type: String,
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
     required: true,
   },
   location: [locationSchema]
