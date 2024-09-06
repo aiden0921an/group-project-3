@@ -6,6 +6,7 @@ import { useAppCtx } from "../utils/AppProvider";
 import "../Sidebar.css";
 import PostButtonLink from "./PostButtonLink";
 import SavedPage from "./SavedPageButton"
+import AboutButtonLink from "./AboutButton";
 
 export default function Sidebar() {
   const { user } = useAppCtx();
@@ -31,6 +32,7 @@ export default function Sidebar() {
 
         <PostButtonLink to="/post">Post for Sale Here</PostButtonLink>
         <SavedPage to="/saved">Saved Items</SavedPage>
+        <AboutButtonLink to="about">About Us</AboutButtonLink>
       {/* <Button variant="success">Post Item For Sale</Button> */}
     </Container>
   );
