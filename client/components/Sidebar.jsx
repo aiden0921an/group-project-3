@@ -12,9 +12,9 @@ export default function Sidebar() {
 
   return (
     <Container className="sidebar d-flex flex-column p-3">
-      <Button variant="secondary" className="mb-3">
+      {/* <Button variant="secondary" className="mb-3">
         Saved Items
-      </Button>
+      </Button> */}
 
       <Nav className="mb-3">
         <NavDropdown
