@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import AppProvider from './utils/AppProvider';
 import { Header, ProtectedRoute, Sidebar } from './components';
-import { HomePage, AuthPage, Logout, PrivatePage, PostPage, SavedPage } from './pages/'
+import { HomePage, AuthPage, Logout, PrivatePage, PostPage, SavedPage, Profile } from './pages/'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -21,6 +21,11 @@ export default function App() {
               <Route path="/private" element={
                 <ProtectedRoute>
                   <PrivatePage />
+                </ProtectedRoute>
+              }/>
+              <Route path="/profile" element={
+                <ProtectedRoute>
+                  <Profile />
                 </ProtectedRoute>
               }/>
               <Route path="/logout" element={<Logout />} />
