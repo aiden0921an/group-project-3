@@ -5,8 +5,8 @@ export default function PrivatePage(){
 
   return (
     <>
-      <h1>Private Page</h1>
-      <p>This is an example of a page that would require an authenticated user.</p>
+      <h1>Profile</h1>
+      <p>We only want this page to render if we are logged in</p>
     </>
   )
 }

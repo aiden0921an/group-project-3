@@ -42,6 +42,11 @@ export default function Header() {
             {user?._id !== undefined && (
               <Nav.Link href="/private">My Shopping Cart</Nav.Link>
             )}
+
+            <Nav className="me-auto">
+            {user?._id !== undefined && (
+              <Nav.Link href="/profile">Profile</Nav.Link>
+            )}
             {/* We'll need to link this differently when we decide how we're doing the cart */}
 
             {user?._id !== undefined ? (
@@ -49,6 +54,7 @@ export default function Header() {
             ) : (
               <Nav.Link href="/auth">Login</Nav.Link>
             )}
+          </Nav>
           </Nav>
         </Navbar.Collapse>
       </Container>
