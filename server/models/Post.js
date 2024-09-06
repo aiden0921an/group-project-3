@@ -29,10 +29,6 @@ const postSchema = new Schema({
     type: Number,
     required: true
   },
-  username: {
-    type: String,
-    required: true,
-  },
   location: [locationSchema]
 });
 
