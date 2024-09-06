@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const upload = require("../../middlewares/uploadMiddleware");
 
-// Import any controllers needed here
 const {
   getAllPosts,
   getPostById,
@@ -11,10 +10,22 @@ const {
   createPostWithImage,
 } = require("../../controllers/post.controller");
 
-router.post("/", upload.single("image"), createPostWithImage);
 
-// Declare the routes that point to the controllers above
-router.get("/post", async (req, res) => {
+async function authMiddleware(req, res, next) {
+  try {
+    const user = await verifyUser(req);
+    if (!user) {
+      return res.status(401).json({ result: 'error', message: 'Unauthorized' });
+    }
+    req.user = user;
+    next();
+  } catch (err) {
+    res.status(500).json({ result: 'error', payload: err.message });
+  }
+}
+
+router.get("/", async (req, res) => {
+
   try {
     const payload = await getAllPosts();
     res.status(200).json({ result: "success", payload });
@@ -34,14 +45,15 @@ router.get("/post/:id", async (req, res) => {
 
 router.post("/post", async (req, res) => {
   try {
-    const payload = await createPost(req.body);
-    res.status(200).json({ result: "success", payload });
+    const payload = await createPost(req);
+    res.status(201).json({ result: "success", payload });
   } catch (err) {
     res.status(500).json({ result: "error", payload: err.message });
   }
 });
 
-router.put("/post/:id", async (req, res) => {
+
+router.put("/:id", authMiddleware, async (req, res) => {
   try {
     const payload = await updatePostById(req.params.id, req.body);
     res.status(200).json({ result: "success", payload });
@@ -50,7 +62,8 @@ router.put("/post/:id", async (req, res) => {
   }
 });
 
-router.delete("/post/:id", async (req, res) => {
+
+router.delete("/:id", authMiddleware, async (req, res) => {
   try {
     const payload = await deletePostById(req.params.id);
     res.status(200).json({ result: "success", payload });

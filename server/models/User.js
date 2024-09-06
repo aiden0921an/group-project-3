@@ -8,9 +8,10 @@ const userSchema = new Schema(
   {
     username: {
       type: String,
-      unique: false,
       required: false,
-      default: this.email,
+      default: function() {
+        return this.email;
+      },
       trim: true,
     },
     email: {
@@ -31,7 +32,7 @@ const userSchema = new Schema(
     posts: [
       {
         type: Schema.Types.ObjectId,
-        ref: Post,
+        ref: 'Post',
       },
     ],
   },

@@ -1,72 +1,69 @@
 const { Post } = require("../models");
+const { User } = require("../models");
 const multer = require("multer");
-// const upload = multer({dest: '/uploads/'})
+const { verifyUser } = require("../controllers/user.controller")
 const Model = Post;
 
-async function getAllItems() {
+async function getAllPosts() {
   try {
     return await Model.find();
   } catch (err) {
+    console.error("Error fetching posts:", err);
     throw new Error(err);
   }
 }
 
-async function getItemById(id) {
+async function getPostById(id) {
   try {
     return await Model.findById(id);
   } catch (err) {
+    console.error("Error fetching post by ID:", err);
     throw new Error(err);
   }
 }
 
-async function createItem(data) {
+async function createPost(req) {
+  const user = await verifyUser(req)
+
   try {
-    return await Model.create(data);
+    const post = await Model.create({ ...req.body, user: user._id });
+    
+    await User.findByIdAndUpdate(
+      user._id,
+      { $push: { posts: post._id }},
+      { new: true }
+    );
+
+    return post;
   } catch (err) {
     throw new Error(err);
   }
 }
 
-const createPostWithImage = async (req, res) => {
-  try {
-    const newPost = new Post({
-      title: req.body.title,
-      description: req.body.description,
-      category: req.body.category,
-      price: req.body.price,
-      username: req.body.username,
-      location: req.body.location,
-      image: req.file ? `/uploads/${req.file.filename}` : null,
-    });
+async function updatePostById(id, data) {
 
-    await newPost.save();
-    res.status(201).json(newPost);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
-
-async function updateItemById(id, data) {
   try {
     return await Model.findByIdAndUpdate(id, data, { new: true });
   } catch (err) {
+    console.error("Error updating post:", err);
     throw new Error(err);
   }
 }
 
-async function deleteItemById(id) {
+async function deletePostById(id) {
   try {
     return await Model.findByIdAndDelete(id);
   } catch (err) {
+    console.error("Error deleting post:", err);
     throw new Error(err);
   }
 }
 
 module.exports = {
-  getAllPosts: getAllItems,
-  getPostById: getItemById,
-  createPost: createItem,
-  updatePostById: updateItemById,
-  deletePostById: deleteItemById,
-  createPostWithImage,
+  getAllPosts,
+  getPostById,
+  createPost,
+  updatePostById,
+  deletePostById,
 };
+

@@ -14,17 +14,17 @@ const locationSchema = new Schema(
         min_length: 1,
         max_length: 50,
       },
-      zip: {
-        type: Number,
-        required: true,
-        min_length: 5,
-        max_length: 5,
-      },
       state: {
         type: String,
         required: true,
         min_length: 2,
         max_length: 2,
+      },
+      zip: {
+        type: Number,
+        required: true,
+        min_length: 5,
+        max_length: 5,
       },
     },
     {
