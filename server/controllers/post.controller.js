@@ -27,6 +27,25 @@ async function createItem(data) {
   }
 }
 
+const createPostWithImage = async (req, res) => {
+  try {
+    const newPost = new Post({
+      title: req.body.title,
+      description: req.body.description,
+      category: req.body.category,
+      price: req.body.price,
+      username: req.body.username,
+      location: req.body.location,
+      image: req.file ? `/uploads/${req.file.filename}` : null,
+    });
+
+    await newPost.save();
+    res.status(201).json(newPost);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 async function updateItemById(id, data) {
   try {
     return await Model.findByIdAndUpdate(id, data, { new: true });
@@ -49,4 +68,5 @@ module.exports = {
   createPost: createItem,
   updatePostById: updateItemById,
   deletePostById: deleteItemById,
+  createPostWithImage,
 };
