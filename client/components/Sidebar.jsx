@@ -4,6 +4,8 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Button from "react-bootstrap/Button";
 import { useAppCtx } from "../utils/AppProvider";
 import "../Sidebar.css";
+import PostButtonLink from "./PostButtonLink";
+import SavedPage from "./SavedPageButton"
 
 export default function Sidebar() {
   const { user } = useAppCtx();
@@ -27,7 +29,9 @@ export default function Sidebar() {
         </NavDropdown>
       </Nav>
 
-      <Button variant="success">Post Item For Sale</Button>
+        <PostButtonLink to="/post">Post for Sale Here</PostButtonLink>
+        <SavedPage to="/saved">Saved Items</SavedPage>
+      {/* <Button variant="success">Post Item For Sale</Button> */}
     </Container>
   );
 }

@@ -14,7 +14,7 @@ const {
 router.post("/", upload.single("image"), createPostWithImage);
 
 // Declare the routes that point to the controllers above
-router.get("/", async (req, res) => {
+router.get("/post", async (req, res) => {
   try {
     const payload = await getAllPosts();
     res.status(200).json({ result: "success", payload });
@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/post/:id", async (req, res) => {
   try {
     const payload = await getPostById(req.params.id);
     res.status(200).json({ result: "success", payload });
@@ -32,7 +32,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/post", async (req, res) => {
   try {
     const payload = await createPost(req.body);
     res.status(200).json({ result: "success", payload });
@@ -41,7 +41,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/post/:id", async (req, res) => {
   try {
     const payload = await updatePostById(req.params.id, req.body);
     res.status(200).json({ result: "success", payload });
@@ -50,7 +50,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/post/:id", async (req, res) => {
   try {
     const payload = await deletePostById(req.params.id);
     res.status(200).json({ result: "success", payload });
