@@ -1,5 +1,5 @@
 
-
+//We will want this to be hidden unless the user is logged in, we could also just have it reroute to the login if we can't get that working
 
 export default function Profile(){
 
