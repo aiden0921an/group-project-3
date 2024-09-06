@@ -29,14 +29,10 @@ const postSchema = new Schema({
     type: Number,
     required: true,
   },
-  username: {
-    type: String,
-    required: true,
-  },
   location: [locationSchema],
   image: {
-    type: String, // Store image URL or path
-    required: false, // Make it optional if not every post will have an image
+    type: String,
+    required: false,
   },
 });
 
