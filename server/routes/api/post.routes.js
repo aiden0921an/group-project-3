@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const upload = require("../../middlewares/uploadMiddleware");
 
 // Import any controllers needed here
 const {
@@ -7,7 +8,10 @@ const {
   createPost,
   updatePostById,
   deletePostById,
+  createPostWithImage,
 } = require("../../controllers/post.controller");
+
+router.post("/", upload.single("image"), createPostWithImage);
 
 // Declare the routes that point to the controllers above
 router.get("/", async (req, res) => {
