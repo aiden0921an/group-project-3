@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const upload = require("../../middlewares/uploadMiddleware");
 
 const {
   getAllPosts,
@@ -6,7 +7,9 @@ const {
   createPost,
   updatePostById,
   deletePostById,
+  createPostWithImage,
 } = require("../../controllers/post.controller");
+
 
 async function authMiddleware(req, res, next) {
   try {
@@ -22,6 +25,7 @@ async function authMiddleware(req, res, next) {
 }
 
 router.get("/", async (req, res) => {
+
   try {
     const payload = await getAllPosts();
     res.status(200).json({ result: "success", payload });
@@ -30,7 +34,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/post/:id", async (req, res) => {
   try {
     const payload = await getPostById(req.params.id);
     res.status(200).json({ result: "success", payload });
@@ -39,7 +43,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/post", async (req, res) => {
   try {
     const payload = await createPost(req);
     res.status(201).json({ result: "success", payload });
@@ -47,6 +51,7 @@ router.post("/", async (req, res) => {
     res.status(500).json({ result: "error", payload: err.message });
   }
 });
+
 
 router.put("/:id", authMiddleware, async (req, res) => {
   try {
@@ -56,6 +61,7 @@ router.put("/:id", authMiddleware, async (req, res) => {
     res.status(500).json({ result: "error", payload: err.message });
   }
 });
+
 
 router.delete("/:id", authMiddleware, async (req, res) => {
   try {
