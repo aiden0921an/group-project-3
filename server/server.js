@@ -14,7 +14,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(routes);
-app.use("/uploads", express.static(path.join(__dirname, "uploads"))); // Serve static files from 'uploads' folder
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "..", "client/dist")));
