@@ -1,73 +1,71 @@
 import React, { useEffect, useRef } from "react";
 
 export default function SquarePayments() {
-  const formRef = useRef(null);
-  const paymentForm = useRef(null);
+  const cardContainerRef = useRef(null);
+  const paymentStatusContainerRef = useRef(null);
 
   useEffect(() => {
-    // Dynamically load the Square Web Payments SDK
-    const script = document.createElement("script");
-    script.src = "https://sandbox.web.squarecdn.com/v1/square.js";
-    script.async = true;
-    script.onload = () => {
-      initializeSquarePaymentForm();
+    const loadSquareScript = () => {
+      return new Promise((resolve) => {
+        const script = document.createElement("script");
+        script.src = "https://sandbox.web.squarecdn.com/v1/square.js";
+        script.onload = () => resolve();
+        document.body.appendChild(script);
+      });
     };
-    document.body.appendChild(script);
 
-    // Cleanup script on component unmount
+    const initializeSquarePayments = async () => {
+      await loadSquareScript();
+
+      const payments = window.Square.payments(
+        "sandbox-sq0idb-mBUVLyBI8U6mZHPdKSeO-g", // Replace with your Square Application ID
+        "L4EYF3X4PCVM5" // Replace with your Square Location ID
+      );
+
+      const card = await payments.card();
+      await card.attach("#card-container");
+
+      document
+        .getElementById("card-button")
+        .addEventListener("click", async () => {
+          try {
+            const result = await card.tokenize();
+            if (result.status === "OK") {
+              console.log(`Payment token is ${result.token}`);
+              paymentStatusContainerRef.current.innerHTML =
+                "Payment Successful";
+              await handleToken(result.token);
+            } else {
+              let errorMessage = `Tokenization failed with status: ${result.status}`;
+              if (result.errors) {
+                errorMessage += ` and errors: ${JSON.stringify(result.errors)}`;
+              }
+              throw new Error(errorMessage);
+            }
+          } catch (e) {
+            console.error(e);
+            paymentStatusContainerRef.current.innerHTML = "Payment Failed";
+          }
+        });
+    };
+
+    initializeSquarePayments();
+
     return () => {
-      document.body.removeChild(script);
+      // Cleanup any event listeners or resources if necessary
+      const cardButton = document.getElementById("card-button");
+      if (cardButton) {
+        cardButton.removeEventListener("click", handleToken);
+      }
     };
   }, []);
 
-  const initializeSquarePaymentForm = () => {
-    paymentForm.current = new window.SquarePaymentForm({
-      applicationId: "YOUR_APPLICATION_ID", // Replace with your Square Application ID
-      inputClass: "sq-input",
-      autoBuild: false,
-      inputStyles: [
-        {
-          fontSize: "16px",
-          padding: "16px",
-          color: "#373F4A",
-        },
-      ],
-      cardNumber: {
-        elementId: "card-number",
-        placeholder: "Card Number",
-      },
-      cvv: {
-        elementId: "cvv",
-        placeholder: "CVV",
-      },
-      expirationDate: {
-        elementId: "expiration-date",
-        placeholder: "MM/YY",
-      },
-      postalCode: {
-        elementId: "postal-code",
-        placeholder: "ZIP",
-      },
-      callbacks: {
-        cardNonceResponseReceived: (errors, nonce, cardData) => {
-          if (errors) {
-            console.log("Encountered errors:", errors);
-            return;
-          }
-          handleNonce(nonce);
-        },
-      },
-    });
-
-    paymentForm.current.build();
-  };
-
-  const handleNonce = async (nonce) => {
+  const handleToken = async (token) => {
     try {
       const response = await fetch("/api/process-payment", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nonce }),
+        body: JSON.stringify({ token }),
       });
       const result = await response.json();
       console.log("Payment result:", result);
@@ -77,17 +75,12 @@ export default function SquarePayments() {
   };
 
   return (
-    <form ref={formRef} id="payment-form">
-      <div id="card-number"></div>
-      <div id="expiration-date"></div>
-      <div id="cvv"></div>
-      <div id="postal-code"></div>
-      <button
-        type="button"
-        onClick={() => paymentForm.current.requestCardNonce()}
-      >
+    <div id="payment-form">
+      <div ref={paymentStatusContainerRef} id="payment-status-container"></div>
+      <div id="card-container"></div>
+      <button id="card-button" type="button">
         Pay
       </button>
-    </form>
+    </div>
   );
 }
