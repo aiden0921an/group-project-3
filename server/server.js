@@ -2,6 +2,7 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const path = require("path");
 const db = require("./config/connection");
+require("dotenv").config();
 
 const routes = require("./routes");
 
@@ -17,7 +18,6 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads"))); // Serve s
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "..", "client/dist")));
-
 
   app.get("/*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "..", "client/dist/index.html"));
