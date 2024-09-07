@@ -18,8 +18,8 @@ export default function SquarePayments() {
       await loadSquareScript();
 
       const payments = window.Square.payments(
-        "sandbox-sq0idb-mBUVLyBI8U6mZHPdKSeO-g", // Replace with your Square Application ID
-        "L4EYF3X4PCVM5" // Replace with your Square Location ID
+        "sandbox-sq0idb-mBUVLyBI8U6mZHPdKSeO-g",
+        "L4EYF3X4PCVM5"
       );
 
       const card = await payments.card();
@@ -52,7 +52,6 @@ export default function SquarePayments() {
     initializeSquarePayments();
 
     return () => {
-      // Cleanup any event listeners or resources if necessary
       const cardButton = document.getElementById("card-button");
       if (cardButton) {
         cardButton.removeEventListener("click", handleToken);
