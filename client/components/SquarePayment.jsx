@@ -1,57 +1,66 @@
 import React, { useEffect, useRef } from "react";
 
-export default function SquarePayment() {
+export default function SquarePayments() {
   const formRef = useRef(null);
   const paymentForm = useRef(null);
 
   useEffect(() => {
-    // Initialize Square payment form
+    // Dynamically load the Square Web Payments SDK
     const script = document.createElement("script");
-    script.src = "https://js.squareup.com/v2/paymentform";
+    script.src = "https://sandbox.web.squarecdn.com/v1/square.js";
+    script.async = true;
     script.onload = () => {
-      paymentForm.current = new window.SqPaymentForm({
-        applicationId: "YOUR_APPLICATION_ID",
-        inputClass: "sq-input",
-        autoBuild: false,
-        inputStyles: [
-          {
-            fontSize: "16px",
-            padding: "16px",
-            color: "#373F4A",
-          },
-        ],
-        cardNumber: {
-          elementId: "card-number",
-          placeholder: "Card Number",
-        },
-        cvv: {
-          elementId: "cvv",
-          placeholder: "CVV",
-        },
-        expirationDate: {
-          elementId: "expiration-date",
-          placeholder: "MM/YY",
-        },
-        postalCode: {
-          elementId: "postal-code",
-          placeholder: "ZIP",
-        },
-        callbacks: {
-          cardNonceResponseReceived: (errors, nonce, cardData) => {
-            if (errors) {
-              console.log("Encountered errors:", errors);
-              return;
-            }
-            // Submit nonce to your server
-            handleNonce(nonce);
-          },
-        },
-      });
-
-      paymentForm.current.build();
+      initializeSquarePaymentForm();
     };
     document.body.appendChild(script);
+
+    // Cleanup script on component unmount
+    return () => {
+      document.body.removeChild(script);
+    };
   }, []);
+
+  const initializeSquarePaymentForm = () => {
+    paymentForm.current = new window.SquarePaymentForm({
+      applicationId: "YOUR_APPLICATION_ID", // Replace with your Square Application ID
+      inputClass: "sq-input",
+      autoBuild: false,
+      inputStyles: [
+        {
+          fontSize: "16px",
+          padding: "16px",
+          color: "#373F4A",
+        },
+      ],
+      cardNumber: {
+        elementId: "card-number",
+        placeholder: "Card Number",
+      },
+      cvv: {
+        elementId: "cvv",
+        placeholder: "CVV",
+      },
+      expirationDate: {
+        elementId: "expiration-date",
+        placeholder: "MM/YY",
+      },
+      postalCode: {
+        elementId: "postal-code",
+        placeholder: "ZIP",
+      },
+      callbacks: {
+        cardNonceResponseReceived: (errors, nonce, cardData) => {
+          if (errors) {
+            console.log("Encountered errors:", errors);
+            return;
+          }
+          handleNonce(nonce);
+        },
+      },
+    });
+
+    paymentForm.current.build();
+  };
 
   const handleNonce = async (nonce) => {
     try {
@@ -69,10 +78,10 @@ export default function SquarePayment() {
 
   return (
     <form ref={formRef} id="payment-form">
-      <div id="sq-card-number"></div>
-      <div id="sq-expiration-date"></div>
-      <div id="sq-cvv"></div>
-      <div id="sq-postal-code"></div>
+      <div id="card-number"></div>
+      <div id="expiration-date"></div>
+      <div id="cvv"></div>
+      <div id="postal-code"></div>
       <button
         type="button"
         onClick={() => paymentForm.current.requestCardNonce()}
