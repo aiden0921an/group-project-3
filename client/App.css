@@ -6,6 +6,44 @@ body {
   font-family: Arial, sans-serif;
 }
 
+.card {
+  border: 1px solid #333;
+  padding: 20px;
+  margin: 10px;
+  background-color: #202020;
+  color: #f1f1f1;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-image {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.posts-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.post-page {
+  padding: 20px;
+  background-color: #202020;
+  color: #f1f1f1;
+}
+
+.post-image {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
 .main-container {
   display: flex;
   height: calc(100vh - 70px);

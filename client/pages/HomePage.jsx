@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Card from '../components/Card';
 
 export default function HomePage() {
   const [posts, setPosts] = useState([]);
@@ -33,18 +34,9 @@ export default function HomePage() {
   return (
     <div>
       <h1>All Posts</h1>
-      <div>
+      <div className="posts-container">
         {posts.map((post) => (
-          <div key={post._id} className="post">
-            <h2>{post.title}</h2>
-            <p>{post.description}</p>
-            <p>Category: {post.category}</p>
-            <p>Price: ${post.price}</p>
-            <p>
-              {/* Location: {post.location.street}, {post.location.city},{" "}
-              {post.location.state} {post.location.zip} */}
-            </p>
-          </div>
+          <Card key={post._id} post={post} />
         ))}
       </div>
     </div>
