@@ -7,12 +7,13 @@ import {
   Logout,
   PrivatePage,
   PostPage,
-  SavedPage,
+  //SavedPage,
   Profile,
   AboutPage,
 } from "./pages/";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import {ShareProvider} from './components/Bookmark'
 
 export default function App() {
   return (
@@ -26,7 +27,7 @@ export default function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/auth" element={<AuthPage />} />
               <Route path="/post/:id" element={<PostPage />} />
-              <Route path="/saved" element={<SavedPage />} />
+              {/* <Route path="/saved" element={<SavedPage />} /> */}
               <Route path="/about" element={<AboutPage />} />
               <Route
                 path="/private"
