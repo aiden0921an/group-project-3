@@ -6,14 +6,10 @@ const Model = Post;
 
 async function getAllPosts() {
   try {
-    const posts = await Post.find().populate("user").exec();
-
-    return posts;
+    return await Post.find().populate("category").populate("user");
   } catch (err) {
     console.error("Error fetching posts:", err);
-    throw new Error(
-      "Unable to fetch posts at the moment. Please try again later."
-    );
+    throw new Error(err);
   }
 }
 

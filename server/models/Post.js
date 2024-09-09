@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const Category = require("./Category");
 
 const locationSchema = new Schema({
   street: { type: String, required: true },
@@ -28,7 +29,8 @@ const postSchema = new Schema({
     },
   },
   category: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: "Category",
     required: true,
   },
   price: {
