@@ -159,6 +159,7 @@ input::placeholder {
   color: #ff6347;
 }
 
+
 .sidebar {
   width: 25%;
   max-width: 25%;
@@ -226,4 +227,13 @@ input::placeholder {
   .card {
     flex: 1 1 calc(100% - 40px);
   }
+
+#desc-text-area{
+  width: 100%;
+  height: 109px;
+}
+label{
+  font-size: larger;
+  padding-bottom: 8px;
+  width: 100%;
 }

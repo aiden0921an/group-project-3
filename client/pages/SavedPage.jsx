@@ -2,17 +2,17 @@
 
 
 // import {createContext, useContext, useState, useEffect} from "react"
-// const sharedContext= () => useContext(sharedContext)
+// export const sharedContext= () => useContext(sharedContext)
 
 
 
 // //Bookmarks will initially be saved to and pulled from local storage
-// export const ShareProvider = ({children}) => {
+//  export const ShareProvider = ({children}) => {
 //   const [bookmarkedItems, setBookmarkedItems] = useState (() => {
 //     const storedBookmarks = JSON.parse(localStorage.getItem(LocalStorageKey));
 //     return Array.isArray(storedBookmarks) ? storedBookmarks : []
 //   })
-// }
+// // }
 
 // const addBookmark = (post) => {
 //   setBookmarkedItems ((prevBookmarks) => [...prevBookmarks, post]);
@@ -38,7 +38,7 @@
 //   setBookmarkedItems((prevBookmarks) =>
 //     prevBookmarks.filter((post) => post.slug !== postSlug)
 //   );
-// };
+// }
 
 // return (
 //   <sharedContext.Provider 
@@ -47,8 +47,9 @@
 //     {children}
 //   </sharedContext.Provider>
 // )
+//  }
 
-//We will want this page to reroute to the login if the user is not logged in
+// We will want this page to reroute to the login if the user is not logged in
 export default function SavedPage(){
 
     return (
@@ -58,4 +59,3 @@ export default function SavedPage(){
       </>
     )
   }
-  
