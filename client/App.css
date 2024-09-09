@@ -61,7 +61,6 @@ body {
   padding: 0 20px;
 }
 
-
 .sidebar {
   width: 25%;
   max-width: 25%;
@@ -102,7 +101,8 @@ body {
   background-color: #181818;
 }
 
-button, .nav {
+button,
+.nav {
   width: 100%;
 }
 
@@ -129,7 +129,7 @@ button {
 }
 
 button:hover {
-  background-color: #444; 
+  background-color: #444;
 }
 
 input {
@@ -144,7 +144,8 @@ input::placeholder {
   color: #ccc;
 }
 
-.navbar, .header {
+.navbar,
+.header {
   background-color: #242424;
   color: #f1f1f1;
 }
@@ -158,7 +159,6 @@ input::placeholder {
 .navbar-nav .nav-link:hover {
   color: #ff6347;
 }
-
 
 .sidebar {
   width: 25%;
@@ -228,12 +228,13 @@ input::placeholder {
     flex: 1 1 calc(100% - 40px);
   }
 
-#desc-text-area{
-  width: 100%;
-  height: 109px;
-}
-label{
-  font-size: larger;
-  padding-bottom: 8px;
-  width: 100%;
+  #desc-text-area {
+    width: 100%;
+    height: 109px;
+  }
+  label {
+    font-size: larger;
+    padding-bottom: 8px;
+    width: 100%;
+  }
 }
