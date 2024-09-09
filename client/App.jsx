@@ -25,7 +25,7 @@ export default function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/auth" element={<AuthPage />} />
-              <Route path="/post" element={<PostPage />} />
+              <Route path="/post/:id" element={<PostPage />} />
               <Route path="/saved" element={<SavedPage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route
