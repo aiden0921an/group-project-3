@@ -33,8 +33,8 @@ const posts = [
     location: {
       street: "123 Elm St",
       city: "Springfield",
-      zip: 12345,
       state: "IL",
+      zip: 12345,
     },
   },
   {
@@ -45,8 +45,8 @@ const posts = [
     location: {
       street: "456 Maple Ave",
       city: "Springfield",
-      zip: 12345,
       state: "IL",
+      zip: 12345,
     },
   },
   {
@@ -57,8 +57,8 @@ const posts = [
     location: {
       street: "789 Oak Dr",
       city: "Springfield",
-      zip: 12345,
       state: "IL",
+      zip: 12345,
     },
   },
 ];
@@ -99,7 +99,7 @@ db.once("open", async () => {
       user: userIds[index % userIds.length], // Assign posts to users cyclically or as needed
     }));
 
-    // Insert posts and get their IDs
+    // Insert posts
     await Post.insertMany(postsWithUsers);
 
     console.log("Seeding complete");

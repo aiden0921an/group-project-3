@@ -1,25 +1,24 @@
+const { Schema, model } = require("mongoose");
 
-const { Schema, model } = require('mongoose');
 const locationSchema = new Schema({
-  street: {type: String, required: true},
+  street: { type: String, required: true },
   city: { type: String, required: true },
   state: { type: String, required: true },
-  zip: {type: Number, required: true },
+  zip: { type: Number, required: true },
 });
-
 
 const postSchema = new Schema({
   title: {
     type: String,
     required: true,
-    min_length: 1,
-    max_length: 100,
+    minlength: 1,
+    maxlength: 100,
   },
   description: {
     type: String,
     required: true,
-    min_length: 1,
-    max_length: 280,
+    minlength: 1,
+    maxlength: 280,
   },
   createdAt: {
     type: Date,
@@ -36,14 +35,14 @@ const postSchema = new Schema({
     type: Number,
     required: true,
   },
-
+  location: locationSchema,
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
     required: true,
-
   },
 });
 
 const Post = model("Post", postSchema);
+
 module.exports = Post;
