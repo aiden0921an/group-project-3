@@ -9,7 +9,7 @@
     "watch": "nodemon server.js"
   },
   "keywords": [],
-  "author": "Gary T Almes",
+  "author": "Aiden Nelson",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
