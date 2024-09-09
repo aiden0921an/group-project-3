@@ -6,3 +6,4 @@ export { default as PostButtonLink } from "./PostButtonLink";
 export { default as SavedPageButton } from "./SavedPageButton";
 export { default as AboutButtonLink } from "./AboutButton";
 export { default as SquarePayment } from "./SquarePayment";
+// export {default as ShareProvider} from "./Bookmark"
