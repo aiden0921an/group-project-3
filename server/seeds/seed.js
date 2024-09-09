@@ -1,7 +1,14 @@
 const db = require("../config/connection");
 const User = require("../models/User");
 const Post = require("../models/Post");
+const Category = require("../models/Category");
 const bcrypt = require("bcrypt");
+
+const categories = [
+  { name: "Real Estate" },
+  { name: "Vehicles" },
+  { name: "Services" },
+];
 
 const users = [
   {
@@ -28,7 +35,6 @@ const posts = [
   {
     title: "Lovely Apartment for Rent",
     description: "A beautiful apartment with a great view.",
-    category: "Real Estate",
     price: 1500,
     location: {
       street: "123 Elm St",
@@ -40,7 +46,6 @@ const posts = [
   {
     title: "Used Car for Sale",
     description: "A reliable used car at a good price.",
-    category: "Vehicles",
     price: 5000,
     location: {
       street: "456 Maple Ave",
@@ -52,7 +57,6 @@ const posts = [
   {
     title: "Guitar Lessons Available",
     description: "Learn to play the guitar with personalized lessons.",
-    category: "Services",
     price: 50,
     location: {
       street: "789 Oak Dr",
@@ -79,7 +83,17 @@ db.once("open", async () => {
         .then((collections) => {
           if (collections.length) return db.db.dropCollection("posts");
         }),
+      db.db
+        .listCollections({ name: "categories" })
+        .toArray()
+        .then((collections) => {
+          if (collections.length) return db.db.dropCollection("categories");
+        }),
     ]);
+
+    // Insert categories and get their IDs
+    const insertedCategories = await Category.insertMany(categories);
+    const categoryIds = insertedCategories.map((category) => category._id);
 
     // Hash passwords
     const hashedUsers = await Promise.all(
@@ -93,14 +107,15 @@ db.once("open", async () => {
     const insertedUsers = await User.insertMany(hashedUsers);
     const userIds = insertedUsers.map((user) => user._id);
 
-    // Assign users to posts
-    const postsWithUsers = posts.map((post, index) => ({
+    // Assign categories to posts (cyclically for this example)
+    const postsWithCategories = posts.map((post, index) => ({
       ...post,
+      category: categoryIds[index % categoryIds.length], // Assign categories cyclically or as needed
       user: userIds[index % userIds.length], // Assign posts to users cyclically or as needed
     }));
 
     // Insert posts
-    await Post.insertMany(postsWithUsers);
+    await Post.insertMany(postsWithCategories);
 
     console.log("Seeding complete");
   } catch (error) {
