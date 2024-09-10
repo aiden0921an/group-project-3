@@ -1,5 +1,6 @@
 const router = require("express").Router();
-const upload = require("../../middlewares/uploadMiddleware");
+const { upload } = require("../../middlewares/uploadMiddleware");
+const handleFileUpload = require("../../middlewares/handleFileUpload");
 
 const {
   getAllPosts,
@@ -41,8 +42,23 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
-  console.log("route");
+router.post("/image", async (req, res) => {
+  upload(req, res, (err) => {
+    console.log(req.file);
+  });
+
+  // console.log(req);
+
+  // try {
+  //   const payload = await createPost(req);
+  //   res.status(201).json({ result: "success", payload });
+  // } catch (err) {
+  //   res.status(500).json({ result: "error", payload: err.message });
+  // }
+});
+
+router.post("/", handleFileUpload, async (req, res) => {
+  console.log(req.body);
   try {
     const payload = await createPost(req);
     res.status(201).json({ result: "success", payload });
