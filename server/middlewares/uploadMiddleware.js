@@ -1,32 +1,32 @@
 const multer = require("multer");
 const path = require("path");
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/");
+// Configure Multer storage
+const imgconfig = multer.diskStorage({
+  destination: (req, file, callback) => {
+    callback(null, "uploads"); // Ensure the "uploads" directory exists
   },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname));
+  filename: (req, file, callback) => {
+    callback(null, `image-${Date.now()}${path.extname(file.originalname)}`);
   },
 });
 
-const fileFilter = (req, file, cb) => {
-  const allowedTypes = /jpeg|jpg|png|gif/;
-  const extname = allowedTypes.test(
-    path.extname(file.originalname).toLowerCase()
-  );
-  const mimetype = allowedTypes.test(file.mimetype);
-
-  if (mimetype && extname) {
-    return cb(null, true);
-  }
-  cb(new Error("Invalid file type"));
-};
-
+// Configure Multer middleware with file size limits and file type validation
 const upload = multer({
-  storage: storage,
-  fileFilter: fileFilter,
-  limits: { fileSize: 1024 * 1024 * 10 },
-});
+  storage: imgconfig,
+  limits: { fileSize: 100000000 }, // 1MB file size limit
+  fileFilter: (req, file, callback) => {
+    const fileType = /jpeg|jpg|png|gif/;
+    const mimeType = fileType.test(file.mimetype);
+    const extname = fileType.test(
+      path.extname(file.originalname).toLowerCase()
+    );
 
-module.exports = upload;
+    if (mimeType && extname) {
+      return callback(null, true);
+    }
+    callback("Error: Invalid file type");
+  },
+}).single("image");
+
+module.exports = { upload };

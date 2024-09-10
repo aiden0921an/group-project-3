@@ -23,7 +23,8 @@ async function getPostById(id) {
 }
 
 async function createPost(req) {
-  const { title, description, condition, price, category, user } = req.body;
+  const { title, description, condition, price, category, imageUrl, user } =
+    req.body;
 
   console.log(user);
 
@@ -41,6 +42,7 @@ async function createPost(req) {
       price,
       category,
       user,
+      imageUrl,
     });
 
     await User.findByIdAndUpdate(
