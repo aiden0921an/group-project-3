@@ -1,4 +1,4 @@
-import { HomeButton } from "../components"
+import { SuccessBtn} from "../components"
 
 
 
@@ -8,7 +8,7 @@ export default function Success(){
       <>
         <h1>Sucess!</h1>
         <p>Your post has been successful.</p>
-        <HomeButton to="/">Home</HomeButton>
+        <SuccessBtn to="about">About Us</SuccessBtn>
       </>
     )
   }

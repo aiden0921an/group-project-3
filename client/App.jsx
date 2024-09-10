@@ -13,6 +13,7 @@ import {
   Profile,
   AboutPage,
   ItemPage,
+  Success
 } from "./pages/";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -58,6 +59,7 @@ export default function App() {
               <Route path="/auth" element={<AuthPage />} />
               <Route path="/post/:id" element={<ItemPage posts={posts} />} />
               <Route path="/post" element={<PostPage />} />
+              <Route path="/success" element={<Success />} />
               <Route path="/saved" element={
                   <ProtectedRoute>
                     <SavedPage />
