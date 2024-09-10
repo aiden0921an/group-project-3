@@ -71,7 +71,7 @@ async function getCategories(){
           "Content-Type": "application/json",
         },
         credentials: "include",
-        body: JSON.stringify({ ...formData, user: user._id }),
+        body: JSON.stringify({ ...formData, user: user._id, category:"66e095cf540d37233e3bbae7" }),
       });
 
       if (response.ok) {

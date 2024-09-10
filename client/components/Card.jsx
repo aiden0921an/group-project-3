@@ -41,7 +41,7 @@ const Card = ({ post }) => {
   return (
     <div className="card" onClick={handleCardClick}>
       <img
-        src={`http://localhost:3001${post.imageUrl}`}
+        src={post.imageUrl}
         alt={post.title}
         className="card-image"
       />

@@ -30,6 +30,7 @@ export default function App() {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
+        console.log(data)
         setPosts(data.payload);
       } catch (err) {
         setError(`Error fetching posts: ${err.message}`);
@@ -55,9 +56,8 @@ export default function App() {
             <Routes>
               <Route path="/" element={<HomePage posts={posts} />} />
               <Route path="/auth" element={<AuthPage />} />
-              <Route path="/post" element={<PostPage />} />
-              {/* <Route path="/post/:id" element={<PostPage />} /> */}
               <Route path="/post/:id" element={<ItemPage posts={posts} />} />
+              <Route path="/post" element={<PostPage />} />
               <Route path="/saved" element={
                   <ProtectedRoute>
                     <SavedPage />
