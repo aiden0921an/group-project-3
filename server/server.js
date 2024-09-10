@@ -13,6 +13,8 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 app.use(routes);
 
 if (process.env.NODE_ENV === "production") {
