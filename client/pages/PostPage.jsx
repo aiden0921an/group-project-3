@@ -113,7 +113,7 @@ export default function PostPage() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form class="post-form" onSubmit={handleSubmit}>
         <label>
           Title:
           <input
