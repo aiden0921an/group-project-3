@@ -63,7 +63,9 @@ export default function PostPage() {
       const response = await fetch("/api/post", {
         method: "POST",
         credentials: "include",
+
         body: formDetails,
+
       });
       if (response.ok) {
         navigate("/");
@@ -138,11 +140,13 @@ export default function PostPage() {
 
   return (
     <>
+
       <form
         class="post-form"
         encType={"multipart/form-data"}
         onSubmit={handleSubmit}
       >
+
         <label>
           Title:
           <input
