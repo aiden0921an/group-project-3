@@ -37,7 +37,7 @@ const Card = ({ post }) => {
 
       <h2>{post.title}</h2>
       <p>{post.description}</p>
-      <p>Category: {post.category.name}</p>
+      {/* <p>Category: {post.category.name}</p> */}
       <p>Price: ${post.price}</p>
       <button onClick={handleBookmarkClick}>
         {isBookmarked ? "Remove Bookmark" : "Bookmark"}
