@@ -31,7 +31,6 @@ export default function Sidebar() {
           <NavDropdown.Item href="#automotive">Automotive</NavDropdown.Item>
           <NavDropdown.Item href="#books">Books</NavDropdown.Item>
           <NavDropdown.Item href="#toys">Real Estate</NavDropdown.Item>
-          <NavDropdown.Item href="#real-estate">Real Estate</NavDropdown.Item>
           <NavDropdown.Item href="#misc">Misc.</NavDropdown.Item>
         </NavDropdown>
       </Nav>
