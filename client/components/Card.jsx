@@ -8,10 +8,16 @@ const Card = ({ post }) => {
   const handleCardClick = () => {
     navigate(`/post/${post._id}`);
   };
+  console.log("Image URL:", post.imageUrl);
 
   return (
     <div className="card" onClick={handleCardClick}>
-      <img src={post.imageUrl} alt={post.title} className="card-image" />
+      <img
+        src={`http://localhost:3001${post.imageUrl}`}
+        alt={post.title}
+        className="card-image"
+      />
+
       <h2>{post.title}</h2>
       <p>{post.description}</p>
       <p>Category: {post.category.name}</p>

@@ -42,6 +42,7 @@ const posts = [
       state: "IL",
       zip: 12345,
     },
+    imageUrl: "/uploads/nathan-walker-winter-house-unsplash.jpg",
   },
   {
     title: "Used Car for Sale",
@@ -53,6 +54,7 @@ const posts = [
       state: "IL",
       zip: 12345,
     },
+    imageUrl: "/uploads/loic-mermilliod-vehicles-unsplash.jpg",
   },
   {
     title: "Guitar Lessons Available",
@@ -64,6 +66,7 @@ const posts = [
       state: "IL",
       zip: 12345,
     },
+    imageUrl: "/uploads/nathana-reboucas-services-unsplash.jpg",
   },
 ];
 
