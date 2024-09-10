@@ -1,28 +1,27 @@
-
 import { useNavigate, useParams } from "react-router-dom";
-import Select from 'react-select';
-import React, { useState, useEffect } from 'react';
+import Select from "react-select";
+import React, { useState, useEffect } from "react";
 
 // Categories options
 const categories = [
-  { value: 'Electronics', label: 'Electronics' },
-  { value: 'Fashion', label: 'Fashion' },
-  { value: 'Home & Garden', label: 'Home & Garden' },
-  { value: 'Health & Beauty', label: 'Health & Beauty' },
-  { value: 'Sports & Outdoors', label: 'Sports & Outdoors' },
-  { value: 'Toys & Hobbies', label: 'Toys & Hobbies' },
-  { value: 'Automotive', label: 'Automotive' },
-  { value: 'Books & Stationery', label: 'Books & Stationery' },
-  { value: 'Food & Beverages', label: 'Food & Beverages' },
-  { value: 'Pet Supplies', label: 'Pet Supplies' }
+  { value: "Electronics", label: "Electronics" },
+  { value: "Fashion", label: "Fashion" },
+  { value: "Home & Garden", label: "Home & Garden" },
+  { value: "Health & Beauty", label: "Health & Beauty" },
+  { value: "Sports & Outdoors", label: "Sports & Outdoors" },
+  { value: "Toys & Hobbies", label: "Toys & Hobbies" },
+  { value: "Automotive", label: "Automotive" },
+  { value: "Books & Stationery", label: "Books & Stationery" },
+  { value: "Food & Beverages", label: "Food & Beverages" },
+  { value: "Pet Supplies", label: "Pet Supplies" },
 ];
 
 // Conditions options
 const conditions = [
-  { value: 'New', label: 'New' },
-  { value: 'Like New', label: 'Like New' },
-  { value: 'Used', label: 'Used' },
-  { value: 'Bad', label: 'Bad' }
+  { value: "New", label: "New" },
+  { value: "Like New", label: "Like New" },
+  { value: "Used", label: "Used" },
+  { value: "Bad", label: "Bad" },
 ];
 
 export default function PostPage() {
@@ -73,25 +72,25 @@ export default function PostPage() {
   const customStyles = {
     option: (provided, state) => ({
       ...provided,
-      color: state.isSelected ? 'white' : 'black',
-      backgroundColor: state.isSelected ? 'blue' : 'white',
+      color: state.isSelected ? "white" : "black",
+      backgroundColor: state.isSelected ? "blue" : "white",
     }),
     control: (provided) => ({
       ...provided,
-      borderColor: 'gray',
+      borderColor: "gray",
     }),
     singleValue: (provided) => ({
       ...provided,
-      color: 'black',
+      color: "black",
     }),
     placeholder: (provided) => ({
       ...provided,
-      color: 'gray',
+      color: "gray",
     }),
     menu: (provided) => ({
       ...provided,
       zIndex: 9999,
-    })
+    }),
   };
 
   const handleCategoryChange = (selectedOption) => {
@@ -113,20 +112,24 @@ export default function PostPage() {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <label>Title:
+        <label>
+          Title:
           <input
             name="title"
             value={formData.title}
             onChange={handleChange}
-            required />
+            required
+          />
         </label>
         <hr />
-        <label>Images:
+        <label>
+          Images:
           <input type="file" />
         </label>
         <hr />
 
-        <label htmlFor="category">Category:
+        <label htmlFor="category">
+          Category:
           <Select
             id="category"
             options={categories}
@@ -137,7 +140,8 @@ export default function PostPage() {
           />
         </label>
         <hr />
-        <label htmlFor="condition">Condition:
+        <label htmlFor="condition">
+          Condition:
           <Select
             id="condition"
             options={conditions}
@@ -148,7 +152,8 @@ export default function PostPage() {
           />
         </label>
         <hr />
-        <label>Price:
+        <label>
+          Price:
           <input
             name="price"
             value={formData.price}
@@ -157,13 +162,15 @@ export default function PostPage() {
           />
         </label>
         <hr />
-        <label>Description:
+        <label>
+          Description:
           <textarea
             id="desc-text-area"
             name="description"
             value={formData.description}
             onChange={handleChange}
-            required />
+            required
+          />
           <hr />
         </label>
         <button type="submit" disabled={isSubmitting}>
@@ -173,6 +180,3 @@ export default function PostPage() {
     </>
   );
 }
-
-
-

@@ -14,6 +14,8 @@ body {
   color: #f1f1f1;
   cursor: pointer;
   transition: transform 0.2s ease;
+  width: calc(33.333% - 40px);
+  box-sizing: border-box;
 }
 
 .card:hover {
@@ -25,6 +27,7 @@ body {
   height: auto;
   margin-bottom: 10px;
 }
+
 
 .posts-container {
   display: flex;
@@ -59,12 +62,9 @@ body {
   padding: 0 20px;
 }
 
-button, .nav {
-  width: 100%;
-}
-
 .sidebar {
   width: 25%;
+  max-width: 25%;
   background-color: #333;
   color: #fff;
   padding: 20px;
@@ -72,8 +72,24 @@ button, .nav {
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  position: relative;
-  top: 0;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.content-container {
+  width: 75%;
+  min-width: 75%;
+  padding: 20px;
+  background-color: #202020;
+  color: #f1f1f1;
+  overflow-y: auto;
+  height: calc(100vh - 70px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
 }
 
 .form-group {
@@ -86,30 +102,9 @@ button, .nav {
   background-color: #181818;
 }
 
-.sidebar-container {
-  width: 25%;
-  border-right: 1px solid #333;
-  padding: 20px;
-  background-color: #242424;
-  position: fixed;
-  top: 60px;
-  bottom: 0;
-  overflow-y: auto;
-  color: #f1f1f1;
-}
-
-button, .nav {
+button,
+.nav {
   width: 100%;
-}
-
-.content-container {
-  width: 75%;
-  padding: 20px;
-  background-color: #202020; 
-  color: #f1f1f1;
-  overflow-y: auto;
-  height: 100%; 
-  /* height: this might adjust the contents ability to scroll, need to check/play with */
 }
 
 .sidebar-container a,
@@ -130,11 +125,12 @@ button {
   padding: 10px 15px;
   cursor: pointer;
   width: 100%;
+  max-width: 100%;
   margin-top: 10px;
 }
 
 button:hover {
-  background-color: #444; 
+  background-color: #444;
 }
 
 input {
@@ -149,7 +145,8 @@ input::placeholder {
   color: #ccc;
 }
 
-.navbar, .header {
+.navbar,
+.header {
   background-color: #242424;
   color: #f1f1f1;
 }
@@ -164,12 +161,89 @@ input::placeholder {
   color: #ff6347;
 }
 
-#desc-text-area{
-  width: 100%;
-  height: 109px;
+.sidebar {
+  width: 25%;
+  max-width: 25%;
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  position: relative;
+  top: 0;
+  border-right: 0.5px solid #dee2e6;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
+
+.sidebar .btn {
+  margin-bottom: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.dropdown-button {
+  border: none;
+  border-radius: 0.25rem;
+  background-color: #6c757d;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.sidebar .dropdown-button:hover,
+.sidebar .dropdown-button:focus {
+  background-color: #212529;
+  color: #fff;
+}
+
+.sidebar .dropdown-button .dropdown-menu {
+  background-color: #212529;
+}
+
+.sidebar .dropdown-button .dropdown-item {
+  padding: 0.5rem 1rem;
+  color: #fff;
+  box-sizing: border-box;
+}
+
+.sidebar .dropdown-button .dropdown-item:hover {
+  background-color: #444;
+}
+
+@media (max-width: 1024px) {
+  .card {
+    flex: 1 1 calc(50% - 40px);
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    flex: 1 1 calc(100% - 40px);
+  }
+
+  #desc-text-area {
+    width: 100%;
+    height: 109px;
+  }
+  label {
+    font-size: larger;
+    padding-bottom: 8px;
+    width: 100%;
+  }
+}
+
 label{
   font-size: larger;
   padding-bottom: 8px;
   width: 100%;
 }
+}
+

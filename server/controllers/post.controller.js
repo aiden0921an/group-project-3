@@ -1,12 +1,12 @@
 const { Post } = require("../models");
 const { User } = require("../models");
 const multer = require("multer");
-const { verifyUser } = require("../controllers/user.controller")
+const { verifyUser } = require("../controllers/user.controller");
 const Model = Post;
 
 async function getAllPosts() {
   try {
-    return await Model.find();
+    return await Post.find().populate("category").populate("user");
   } catch (err) {
     console.error("Error fetching posts:", err);
     throw new Error(err);
@@ -47,7 +47,6 @@ async function createPost(req) {
 }
 
 async function updatePostById(id, data) {
-
   try {
     return await Model.findByIdAndUpdate(id, data, { new: true });
   } catch (err) {
@@ -72,4 +71,3 @@ module.exports = {
   updatePostById,
   deletePostById,
 };
-
