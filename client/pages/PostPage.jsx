@@ -71,7 +71,7 @@ async function getCategories(){
           "Content-Type": "application/json",
         },
         credentials: "include",
-        body: JSON.stringify({ ...formData, user: user._id, category:"66e095cf540d37233e3bbae7" }),
+        body: JSON.stringify({ ...formData, user: user._id}),
       });
 
       if (response.ok) {
@@ -133,7 +133,7 @@ async function getCategories(){
 
   return (
     <>
-      <form class="post-form" onSubmit={handleSubmit}>
+      <form className="post-form" onSubmit={handleSubmit}>
         <label>
           Title:
           <input
