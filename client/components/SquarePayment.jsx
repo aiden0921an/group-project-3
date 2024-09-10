@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from "react";
 export default function SquarePayments() {
   const cardContainerRef = useRef(null);
   const paymentStatusContainerRef = useRef(null);
+  const priceRef = useRef(null);
 
   useEffect(() => {
     const loadSquareScript = () => {
@@ -47,6 +48,15 @@ export default function SquarePayments() {
             paymentStatusContainerRef.current.innerHTML = "Payment Failed";
           }
         });
+
+      // Define the SquarePayments object after initialization
+      window.SquarePayments = {
+        openPaymentForm: (price) => {
+          priceRef.current = price;
+          // Trigger the click event on the button to open the payment form
+          document.getElementById("card-button").click();
+        },
+      };
     };
 
     initializeSquarePayments();
@@ -64,7 +74,7 @@ export default function SquarePayments() {
       const response = await fetch("/api/process-payment", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token }),
+        body: JSON.stringify({ token, price: priceRef.current }),
       });
       const result = await response.json();
       console.log("Payment result:", result);
@@ -77,7 +87,7 @@ export default function SquarePayments() {
     <div id="payment-form">
       <div ref={paymentStatusContainerRef} id="payment-status-container"></div>
       <div id="card-container"></div>
-      <button id="card-button" type="button">
+      <button id="card-button" type="button" style={{ display: "none" }}>
         Pay
       </button>
     </div>
