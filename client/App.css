@@ -28,6 +28,7 @@ body {
   margin-bottom: 10px;
 }
 
+
 .posts-container {
   display: flex;
   flex-wrap: wrap;
@@ -236,4 +237,5 @@ label{
   font-size: larger;
   padding-bottom: 8px;
   width: 100%;
+}
 }
