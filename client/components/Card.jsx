@@ -40,11 +40,7 @@ const Card = ({ post }) => {
 
   return (
     <div className="card" onClick={handleCardClick}>
-      <img
-        src={post.imageUrl}
-        alt={post.title}
-        className="card-image"
-      />
+      <img src={post.imageUrl} alt={post.title} className="card-image" />
 
       <h2>{post.title}</h2>
       <p>{post.description}</p>

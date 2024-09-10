@@ -3,27 +3,10 @@ import Select from "react-select";
 import React, { useState, useEffect } from "react";
 import { useAppCtx } from "../utils/AppProvider";
 
-
-
 const ItemPage = ({ posts }) => {
   const { id } = useParams();
-  const category = category.find(category => category._id === id);
-  
-  
-}
-
-// const categories = [
-//   { value: "Electronics", label: "Electronics" },
-//   { value: "Fashion", label: "Fashion" },
-//   { value: "Home & Garden", label: "Home & Garden" },
-//   { value: "Health & Beauty", label: "Health & Beauty" },
-//   { value: "Sports & Outdoors", label: "Sports & Outdoors" },
-//   { value: "Toys & Hobbies", label: "Toys & Hobbies" },
-//   { value: "Automotive", label: "Automotive" },
-//   { value: "Books & Stationery", label: "Books & Stationery" },
-//   { value: "Food & Beverages", label: "Food & Beverages" },
-//   { value: "Pet Supplies", label: "Pet Supplies" },
-// ];
+  const category = category.find((category) => category._id === id);
+};
 
 // Conditions options
 const conditions = [
@@ -43,18 +26,21 @@ export default function PostPage() {
     category: "",
     price: "",
   });
+
+  const [image, setImage] = useState();
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedCondition, setSelectedCondition] = useState(null);
-  const [ categories, setCategories ] = useState([])
+  const [categories, setCategories] = useState([]);
 
-async function getCategories(){
-  const resp = await fetch("/api/category") 
-  const result = await resp.json()
-  console.log(result)
-  setCategories(result.payload)
-}
+  async function getCategories() {
+    const resp = await fetch("/api/category");
+    const result = await resp.json();
+    console.log(result);
+    setCategories(result.payload);
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -63,17 +49,24 @@ async function getCategories(){
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formDetails = new FormData();
+    formDetails.append("image", image);
+    formDetails.append("title", formData.title);
+    formDetails.append("price", formData.price);
+    formDetails.append("description", formData.description);
+    formDetails.append("condition", formData.condition);
+    formDetails.append("category", formData.category);
+    formDetails.append("user", user._id);
     setIsSubmitting(true);
+
     try {
       const response = await fetch("/api/post", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
         credentials: "include",
-        body: JSON.stringify({ ...formData, user: user._id}),
-      });
 
+        body: formDetails,
+
+      });
       if (response.ok) {
         navigate("/");
       } else {
@@ -85,6 +78,20 @@ async function getCategories(){
     } finally {
       setIsSubmitting(false);
     }
+
+    // const submitData = await fetch("/api/post", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   credentials: "include",
+    //   body: {
+    //     ...formData,
+    //     category: "66e095cf540d37233e3bbae7",
+    //     user: user._id,
+    //   },
+    // });
+    // console.log(submitData);
   };
 
   const customStyles = {
@@ -128,12 +135,18 @@ async function getCategories(){
   };
 
   useEffect(() => {
-    getCategories()
-  }, [])
+    getCategories();
+  }, []);
 
   return (
     <>
-      <form className="post-form" onSubmit={handleSubmit}>
+
+      <form
+        class="post-form"
+        encType={"multipart/form-data"}
+        onSubmit={handleSubmit}
+      >
+
         <label>
           Title:
           <input
@@ -146,7 +159,13 @@ async function getCategories(){
         <hr />
         <label>
           Images:
-          <input type="file" />
+          <input
+            type="file"
+            name="image"
+            onChange={(e) => {
+              setImage(e.target.files[0]);
+            }}
+          />
         </label>
         <hr />
 
