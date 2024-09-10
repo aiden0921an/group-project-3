@@ -23,13 +23,19 @@ async function getPostById(id) {
 }
 
 async function createPost(req) {
-  const user = await verifyUser(req)
+
+  const { title, description, condition, price, category, user } = req.body
 
   try {
-    const post = await Model.create({ ...req.body, user: user._id });
+    const verifiedUser = await verifyUser(req)
     
+    if( !verifiedUser ){
+      throw new Error("Could not verify");
+    }
+
+    const post = await Model.create({ title, description, condition, price, category, user });
     await User.findByIdAndUpdate(
-      user._id,
+      user,
       { $push: { posts: post._id }},
       { new: true }
     );

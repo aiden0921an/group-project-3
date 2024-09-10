@@ -29,8 +29,10 @@ export default function PostPage() {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
+    condition: "",
     category: "",
     price: "",
+
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
@@ -94,10 +96,18 @@ export default function PostPage() {
 
   const handleCategoryChange = (selectedOption) => {
     setSelectedCategory(selectedOption);
+    setFormData((prevData) => ({
+      ...prevData,
+      category: selectedOption ? selectedOption.value : "",
+    }));
   };
-
+  
   const handleConditionChange = (selectedOption) => {
     setSelectedCondition(selectedOption);
+    setFormData((prevData) => ({
+      ...prevData,
+      condition: selectedOption ? selectedOption.value : "",
+    }));
   };
 
   return (
@@ -141,7 +151,6 @@ export default function PostPage() {
         <label>Price:
           <input
             name="price"
-            defaultValue="50"
             value={formData.price}
             onChange={handleChange}
             required
