@@ -2,30 +2,16 @@ const router = require("express").Router();
 const upload = require("../../middlewares/uploadMiddleware");
 
 const {
-  getAllPosts,
-  getPostById,
-  createPost,
-  updatePostById,
-  deletePostById,
-  createPostWithImage,
-} = require("../../controllers/post.controller");
-
-async function authMiddleware(req, res, next) {
-  try {
-    const user = await verifyUser(req);
-    if (!user) {
-      return res.status(401).json({ result: "error", message: "Unauthorized" });
-    }
-    req.user = user;
-    next();
-  } catch (err) {
-    res.status(500).json({ result: "error", payload: err.message });
-  }
-}
+  getAllItems,
+  getItemById,
+  createItem,
+  updateItemById,
+  deleteItemById,
+} = require("../../controllers/category.controller");
 
 router.get("/", async (req, res) => {
   try {
-    const payload = await getAllPosts();
+    const payload = await getAllItems();
     res.status(200).json({ result: "success", payload });
   } catch (err) {
     res.status(500).json({ result: "error", payload: err.message });
@@ -34,7 +20,7 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
-    const payload = await getPostById(req.params.id);
+    const payload = await getItemById(req.params.id);
     res.status(200).json({ result: "success", payload });
   } catch (err) {
     res.status(500).json({ result: "error", payload: err.message });
@@ -42,27 +28,26 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  console.log("route");
   try {
-    const payload = await createPost(req);
+    const payload = await createItem(req);
     res.status(201).json({ result: "success", payload });
   } catch (err) {
     res.status(500).json({ result: "error", payload: err.message });
   }
 });
 
-router.put("/:id", authMiddleware, async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
-    const payload = await updatePostById(req.params.id, req.body);
+    const payload = await updateItemById(req.params.id, req.body);
     res.status(200).json({ result: "success", payload });
   } catch (err) {
     res.status(500).json({ result: "error", payload: err.message });
   }
 });
 
-router.delete("/:id", authMiddleware, async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
-    const payload = await deletePostById(req.params.id);
+    const payload = await deleteItemById(req.params.id);
     res.status(200).json({ result: "success", payload });
   } catch (err) {
     res.status(500).json({ result: "error", payload: err.message });

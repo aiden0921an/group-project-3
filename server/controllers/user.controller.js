@@ -6,20 +6,20 @@ require("dotenv").config();
 const Model = User;
 
 async function verifyUser(req) {
-  console.log("here")
+  //console.log(req.cookies);
 
-  let cookie
-  // try {
-  //   cookie = await req.cookies["auth-cookie"];
-  // } catch(err){
-  //   console.log(err)
-  // }
+  let cookie;
+  try {
+    cookie = await req.cookies["auth-cookie"];
+  } catch (err) {
+    console.log(err);
+  }
 
-  // console.log("cookie", cookie)
-  // if (!cookie) return false;
+  console.log("cookie", cookie);
+  if (!cookie) return false;
 
   try {
-    const isVerified = { id: "66db2983001910c999103bd5" } //jwt.verify(cookie, process.env.JWT_SECRET);
+    const isVerified = jwt.verify(cookie, process.env.JWT_SECRET);
 
     if (!isVerified) return false;
 
@@ -57,7 +57,7 @@ async function getAllUsers() {
 
 async function getUserById(id) {
   try {
-    return await Model.findById(id).populate('posts');
+    return await Model.findById(id).populate("posts");
   } catch (err) {
     console.error("Error fetching user by ID:", err);
     throw new Error(err);

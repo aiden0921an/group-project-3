@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import Select from "react-select";
 import React, { useState, useEffect } from "react";
+import { useAppCtx } from "../utils/AppProvider";
 
 // Categories options
 const categories = [
@@ -25,13 +26,14 @@ const conditions = [
 ];
 
 export default function PostPage() {
+  const { user } = useAppCtx();
+
   const [formData, setFormData] = useState({
     title: "",
     description: "",
     condition: "",
     category: "",
     price: "",
-
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
@@ -53,7 +55,7 @@ export default function PostPage() {
           "Content-Type": "application/json",
         },
         credentials: "include",
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, user: user._id }),
       });
 
       if (response.ok) {
@@ -100,7 +102,7 @@ export default function PostPage() {
       category: selectedOption ? selectedOption.value : "",
     }));
   };
-  
+
   const handleConditionChange = (selectedOption) => {
     setSelectedCondition(selectedOption);
     setFormData((prevData) => ({
@@ -132,7 +134,10 @@ export default function PostPage() {
           Category:
           <Select
             id="category"
-            options={categories}
+            options={categories.map((category) => ({
+              value: category._id,
+              label: category.name,
+            }))}
             value={selectedCategory}
             onChange={handleCategoryChange}
             styles={customStyles}
