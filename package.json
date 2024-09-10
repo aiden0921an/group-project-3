@@ -8,7 +8,7 @@
     "develop": "concurrently \"cd server && npm run watch\" \"cd client && npx vite\"",
     "install": "cd server && npm i && cd ../client && npm i && npm run build",
     "seed": "cd server && npm run seed",
-    "build": "cd client && npm run build && npm run seed"
+    "build": "cd client && npm run build"
   },
   "author": "",
   "license": "ISC",
