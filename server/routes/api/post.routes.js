@@ -34,7 +34,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/post/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const payload = await getPostById(req.params.id);
     res.status(200).json({ result: "success", payload });
@@ -43,7 +43,8 @@ router.get("/post/:id", async (req, res) => {
   }
 });
 
-router.post("/post", async (req, res) => {
+router.post("/", async (req, res) => {
+  console.log("route")
   try {
     const payload = await createPost(req);
     res.status(201).json({ result: "success", payload });

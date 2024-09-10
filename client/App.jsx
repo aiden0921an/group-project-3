@@ -7,6 +7,7 @@ import {
   AuthPage,
   Logout,
   PrivatePage,
+  IndividualPost,
   PostPage,
   SavedPage,
   Profile,
