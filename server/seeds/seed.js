@@ -6,8 +6,13 @@ const bcrypt = require("bcrypt");
 
 const categories = [
   { name: "Real Estate" },
-  { name: "Vehicles" },
+  { name: "Automotive" },
   { name: "Services" },
+  { name: "Fashion" },
+  { name: "Electronics" },
+  { name: "Home & Garden" },
+  { name: "Books" },
+  { name: "Food & Beverages" },
 ];
 
 const users = [
