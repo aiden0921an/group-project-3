@@ -3,19 +3,27 @@ import Select from "react-select";
 import React, { useState, useEffect } from "react";
 import { useAppCtx } from "../utils/AppProvider";
 
-// Categories options
-const categories = [
-  { value: "Electronics", label: "Electronics" },
-  { value: "Fashion", label: "Fashion" },
-  { value: "Home & Garden", label: "Home & Garden" },
-  { value: "Health & Beauty", label: "Health & Beauty" },
-  { value: "Sports & Outdoors", label: "Sports & Outdoors" },
-  { value: "Toys & Hobbies", label: "Toys & Hobbies" },
-  { value: "Automotive", label: "Automotive" },
-  { value: "Books & Stationery", label: "Books & Stationery" },
-  { value: "Food & Beverages", label: "Food & Beverages" },
-  { value: "Pet Supplies", label: "Pet Supplies" },
-];
+
+
+const ItemPage = ({ posts }) => {
+  const { id } = useParams();
+  const category = category.find(category => category._id === id);
+  
+  
+}
+
+// const categories = [
+//   { value: "Electronics", label: "Electronics" },
+//   { value: "Fashion", label: "Fashion" },
+//   { value: "Home & Garden", label: "Home & Garden" },
+//   { value: "Health & Beauty", label: "Health & Beauty" },
+//   { value: "Sports & Outdoors", label: "Sports & Outdoors" },
+//   { value: "Toys & Hobbies", label: "Toys & Hobbies" },
+//   { value: "Automotive", label: "Automotive" },
+//   { value: "Books & Stationery", label: "Books & Stationery" },
+//   { value: "Food & Beverages", label: "Food & Beverages" },
+//   { value: "Pet Supplies", label: "Pet Supplies" },
+// ];
 
 // Conditions options
 const conditions = [
@@ -39,6 +47,14 @@ export default function PostPage() {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedCondition, setSelectedCondition] = useState(null);
+  const [ categories, setCategories ] = useState([])
+
+async function getCategories(){
+  const resp = await fetch("/api/category") 
+  const result = await resp.json()
+  console.log(result)
+  setCategories(result.payload)
+}
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -59,7 +75,7 @@ export default function PostPage() {
       });
 
       if (response.ok) {
-        navigate("/success");
+        navigate("/");
       } else {
         const result = await response.json();
         console.error(result.payload);
@@ -110,6 +126,10 @@ export default function PostPage() {
       condition: selectedOption ? selectedOption.value : "",
     }));
   };
+
+  useEffect(() => {
+    getCategories()
+  }, [])
 
   return (
     <>

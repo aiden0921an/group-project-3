@@ -48,7 +48,7 @@ const Card = ({ post }) => {
 
       <h2>{post.title}</h2>
       <p>{post.description}</p>
-      <p>Category: {post.category.name}</p>
+      {/* <p>Category: {post.category.name}</p> */}
       <p>Price: ${post.price}</p>
       {post.location && (
         <div className="card-location">
