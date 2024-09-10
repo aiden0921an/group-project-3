@@ -38,6 +38,10 @@ const postSchema = new Schema({
     required: true,
   },
   location: locationSchema,
+  imageUrl: {
+    type: String,
+    required: false,
+  },
   user: {
     type: Schema.Types.ObjectId,
     ref: "User",
