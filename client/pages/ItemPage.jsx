@@ -11,7 +11,10 @@ const ItemPage = ({ posts }) => {
   useEffect(() => {
     const post = posts?.find((post) => post._id === id);
     setCurrentPost(post);
-  }, []);
+    if (post) {
+      setPrice(post.price); // Set price when post is found
+    }
+  }, [id, posts]); // Add posts and id to the dependency array
 
   const handleBuyNowClick = () => {
     setPaymentVisible(true);
@@ -32,7 +35,9 @@ const ItemPage = ({ posts }) => {
       {<p>Category: {currentPost.category.name}</p>}
       <p>Price: ${currentPost.price}</p>
       <div className="button-container">
-        <button onClick={handleBuyNowClick}>Buy Now</button>
+        {!isPaymentVisible && (
+          <button onClick={handleBuyNowClick}>Buy Now</button>
+        )}
       </div>
       {isPaymentVisible && <SquarePayment price={price} />}
     </div>
