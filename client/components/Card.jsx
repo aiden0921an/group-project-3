@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSharedContext } from "../components/Bookmark";
-import { useCart } from '../utils/CartProvider';
+import { useCart } from "../utils/CartProvider";
 import "../App.css";
 
 const Card = ({ post }) => {
@@ -29,7 +29,7 @@ const Card = ({ post }) => {
   const handleAddToCart = (e) => {
     e.stopPropagation(); // Prevents the event from bubbling up to the card click
     addToCart(post); // Add the item to the cart
-};
+  };
 
   return (
     <div className="card" onClick={handleCardClick}>
@@ -50,13 +50,10 @@ const Card = ({ post }) => {
         <button onClick={handleBookmarkClick}>
           {isBookmarked ? "Remove Bookmark" : "Bookmark"}
         </button>
-      </div>
-      <div className="button-container">
         <button onClick={handleAddToCart}>Add to Cart</button>
       </div>
     </div>
   );
 };
-
 
 export default Card;
