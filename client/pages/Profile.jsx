@@ -6,7 +6,7 @@ export default function Profile(){
     return (
       <>
         <h1>Profile</h1>
-        <p>To Do: figure out what we wpecifically want displayed here</p>
+        <p>To Do: figure out what we wpecifically want displayed here</p> 
       </>
     )
   }
