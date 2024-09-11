@@ -38,24 +38,24 @@ export default function Header() {
         </div>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
+          {/* <Nav className="me-auto">
             {user?._id !== undefined && (
               <Nav.Link href="/private">My Shopping Cart</Nav.Link>
-            )}
+            )} */}
 
-            <Nav className="me-auto">
+          {/* <Nav className="me-auto">
               {user?._id !== undefined && (
                 <Nav.Link href="/profile">Profile</Nav.Link>
-              )}
-              {/* We'll need to link this differently when we decide how we're doing the cart */}
+              )} */}
+          {/* We'll need to link this differently when we decide how we're doing the cart */}
 
-              {user?._id !== undefined ? (
-                <Nav.Link href="/logout">Logout</Nav.Link>
-              ) : (
-                <Nav.Link href="/auth">Login</Nav.Link>
-              )}
-            </Nav>
-          </Nav>
+          {user?._id !== undefined ? (
+            <Nav.Link href="/logout">Logout</Nav.Link>
+          ) : (
+            <Nav.Link href="/auth">Login</Nav.Link>
+          )}
+          {/* </Nav> */}
+          {/* </Nav> */}
         </Navbar.Collapse>
       </Container>
     </Navbar>
