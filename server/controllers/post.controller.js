@@ -42,7 +42,8 @@ async function createPost(req) {
       price,
       category,
       user,
-      ...(imageUrl && { imageUrl }),
+      imageUrl,
+      // ...(imageUrl && { imageUrl }),
     });
 
     await User.findByIdAndUpdate(
