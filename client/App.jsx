@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppProvider from "./utils/AppProvider";
+import CartProvider from './utils/CartProvider';
 import { Header, ProtectedRoute, Sidebar, SquarePayment } from "./components";
 import {
   HomePage,
@@ -31,7 +32,6 @@ export default function App() {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
-        console.log(data)
         setPosts(data.payload);
       } catch (err) {
         setError(`Error fetching posts: ${err.message}`);
@@ -48,49 +48,51 @@ export default function App() {
 
   return (
     <ShareProvider>
-    <AppProvider>
-      <BrowserRouter>
-        <Header />
-        <div className="main-container">
-          <Sidebar />
-          <div className="content-container">
-            <Routes>
-              <Route path="/" element={<HomePage posts={posts} />} />
-              <Route path="/category/:categoryName" element={<CategoryPage posts={posts} />} />
-              <Route path="/auth" element={<AuthPage />} />
-              <Route path="/post/:id" element={<ItemPage posts={posts} />} />
-              <Route path="/post" element={<PostPage />} />
-              <Route path="/success" element={<Success />} />
-              <Route path="/saved" element={
-                  <ProtectedRoute>
-                    <SavedPage />
-                  </ProtectedRoute>
-                }
-              />
-              <Route path="/about" element={<AboutPage />} />
-              <Route
-                path="/private"
-                element={
-                  <ProtectedRoute>
-                    <PrivatePage />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/profile"
-                element={
-                  <ProtectedRoute>
-                    <Profile />
-                  </ProtectedRoute>
-                }
-              />
-              <Route path="/logout" element={<Logout />} />
-              <Route path="/payment" element={<SquarePayment />} />
-            </Routes>
-          </div>
-        </div>
-      </BrowserRouter>
-    </AppProvider>
+      <AppProvider>
+        <CartProvider> {/* Wrap your app with CartProvider */}
+          <BrowserRouter>
+            <Header />
+            <div className="main-container">
+              <Sidebar />
+              <div className="content-container">
+                <Routes>
+                  <Route path="/" element={<HomePage posts={posts} />} />
+                  <Route path="/category/:categoryName" element={<CategoryPage posts={posts} />} />
+                  <Route path="/auth" element={<AuthPage />} />
+                  <Route path="/post/:id" element={<ItemPage posts={posts} />} />
+                  <Route path="/post" element={<PostPage />} />
+                  <Route path="/success" element={<Success />} />
+                  <Route path="/saved" element={
+                      <ProtectedRoute>
+                        <SavedPage />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route path="/about" element={<AboutPage />} />
+                  <Route
+                    path="/private"
+                    element={
+                      <ProtectedRoute>
+                        <PrivatePage />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/profile"
+                    element={
+                      <ProtectedRoute>
+                        <Profile />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route path="/logout" element={<Logout />} />
+                  <Route path="/payment" element={<SquarePayment />} />
+                </Routes>
+              </div>
+            </div>
+          </BrowserRouter>
+        </CartProvider>
+      </AppProvider>
     </ShareProvider>
   );
 }

@@ -7,4 +7,5 @@ export { default as SavedPageButton } from "./SavedPageButton";
 export { default as AboutButtonLink } from "./AboutButton";
 export { default as SquarePayment } from "./SquarePayment";
 export { default as SuccessBtn } from "./SuccessBtn";
+export { default as Card } from "./Card";
 // export {default as ShareProvider} from "./Bookmark"
