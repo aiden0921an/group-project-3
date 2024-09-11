@@ -7,12 +7,12 @@ import {
   AuthPage,
   Logout,
   PrivatePage,
-  IndividualPost,
   PostPage,
   SavedPage,
   Profile,
   AboutPage,
   ItemPage,
+  CategoryPage,
   Success
 } from "./pages/";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -56,6 +56,7 @@ export default function App() {
           <div className="content-container">
             <Routes>
               <Route path="/" element={<HomePage posts={posts} />} />
+              <Route path="/category/:categoryName" element={<CategoryPage posts={posts} />} />
               <Route path="/auth" element={<AuthPage />} />
               <Route path="/post/:id" element={<ItemPage posts={posts} />} />
               <Route path="/post" element={<PostPage />} />

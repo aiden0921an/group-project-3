@@ -7,31 +7,27 @@ import "../App.css";
 import PostButtonLink from "./PostButtonLink";
 import SavedPage from "./SavedPageButton"
 import AboutButtonLink from "./AboutButton";
+import { Link } from "react-router-dom";
+
+function formatCategoryName(name) {
+  return name.toLowerCase().replace(/\s+/g, '-');
+}
 
 export default function Sidebar() {
   const { user } = useAppCtx();
 
   return (
     <Container className="sidebar d-flex flex-column p-3">
-      {/* <Button variant="secondary" className="mb-3">
-        Saved Items
-      </Button> */}
-
-      <Nav className="mb-3">
-        <NavDropdown
-          title="Categories"
-          id="categories-dropdown"
-          className="dropdown-button"
-        >
-          <NavDropdown.Item href="/electronics">Electronics</NavDropdown.Item>
-          <NavDropdown.Item href="/clothing">Clothing</NavDropdown.Item>
-          <NavDropdown.Item href="/furniture">Furniture</NavDropdown.Item>
-          <NavDropdown.Item href="/toys">Toys & Games</NavDropdown.Item>
-          <NavDropdown.Item href="/furniture">Furniture</NavDropdown.Item>
-          <NavDropdown.Item href="/automotive">Automotive</NavDropdown.Item>
-          <NavDropdown.Item href="/books">Books</NavDropdown.Item>
-          <NavDropdown.Item href="/toys">Real Estate</NavDropdown.Item>
-          <NavDropdown.Item href="/misc">Misc.</NavDropdown.Item>
+    <Nav className="mb-3">
+        <NavDropdown title="Categories" id="categories-dropdown" className="dropdown-button">
+          <NavDropdown.Item as={Link} to={`/category/${formatCategoryName("Electronics")}`}>Electronics</NavDropdown.Item>
+          <NavDropdown.Item as={Link} to={`/category/${formatCategoryName("Clothing")}`}>Clothing</NavDropdown.Item>
+          <NavDropdown.Item as={Link} to={`/category/${formatCategoryName("Furniture")}`}>Furniture</NavDropdown.Item>
+          <NavDropdown.Item as={Link} to={`/category/${formatCategoryName("Toys & Games")}`}>Toys & Games</NavDropdown.Item>
+          <NavDropdown.Item as={Link} to={`/category/${formatCategoryName("Automotive")}`}>Automotive</NavDropdown.Item>
+          <NavDropdown.Item as={Link} to={`/category/${formatCategoryName("Books")}`}>Books</NavDropdown.Item>
+          <NavDropdown.Item as={Link} to={`/category/${formatCategoryName("Real Estate")}`}>Real Estate</NavDropdown.Item>
+          <NavDropdown.Item as={Link} to={`/category/${formatCategoryName("Misc")}`}>Misc.</NavDropdown.Item>
         </NavDropdown>
       </Nav>
 
