@@ -28,6 +28,19 @@ body {
   margin-bottom: 10px;
 }
 
+.item-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.item-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
 .posts-container {
   display: flex;
   flex-wrap: wrap;
@@ -174,7 +187,7 @@ input::placeholder {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
+  height: 92vh;
   position: relative;
   top: 0;
   border-right: 0.5px solid #dee2e6;
@@ -249,10 +262,10 @@ label {
   padding-bottom: 8px;
   width: 100%;
 }
-.post-form{
+.post-form {
   width: 100%;
 }
-#desc-text-area{
+#desc-text-area {
   width: 100%;
   height: 90px;
 }
