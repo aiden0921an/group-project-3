@@ -12,8 +12,8 @@ export default function Header() {
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
         <Navbar.Brand href="/">
-          <img src={logo} alt="Meta's List" style={{ height: "40px" }} />
-          Meta's List
+          <img src={logo} alt="Meta Mart" style={{ height: "40px" }} />
+          Meta Mart
         </Navbar.Brand>
         <div className="d-flex justify-content-center flex-grow-1">
           <form
@@ -44,17 +44,17 @@ export default function Header() {
             )}
 
             <Nav className="me-auto">
-            {user?._id !== undefined && (
-              <Nav.Link href="/profile">Profile</Nav.Link>
-            )}
-            {/* We'll need to link this differently when we decide how we're doing the cart */}
+              {user?._id !== undefined && (
+                <Nav.Link href="/profile">Profile</Nav.Link>
+              )}
+              {/* We'll need to link this differently when we decide how we're doing the cart */}
 
-            {user?._id !== undefined ? (
-              <Nav.Link href="/logout">Logout</Nav.Link>
-            ) : (
-              <Nav.Link href="/auth">Login</Nav.Link>
-            )}
-          </Nav>
+              {user?._id !== undefined ? (
+                <Nav.Link href="/logout">Logout</Nav.Link>
+              ) : (
+                <Nav.Link href="/auth">Login</Nav.Link>
+              )}
+            </Nav>
           </Nav>
         </Navbar.Collapse>
       </Container>
