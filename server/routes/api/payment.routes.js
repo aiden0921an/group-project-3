@@ -10,13 +10,13 @@ const squareClient = new Client({
 const { paymentsApi } = squareClient;
 
 router.post("/process-payment", async (req, res) => {
-  const { nonce } = req.body;
+  const { token, price } = req.body;
 
   try {
     const response = await paymentsApi.createPayment({
-      sourceId: nonce,
+      sourceId: token,
       amountMoney: {
-        amount: 1000,
+        amount: price * 100,
         currency: "USD",
       },
       idempotencyKey: new Date().getTime().toString(),
