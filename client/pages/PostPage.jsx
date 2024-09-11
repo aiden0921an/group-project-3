@@ -8,12 +8,11 @@ const ItemPage = ({ posts }) => {
   const category = category.find((category) => category._id === id);
 };
 
-// Conditions options
 const conditions = [
   { value: "New", label: "New" },
   { value: "Like New", label: "Like New" },
   { value: "Used", label: "Used" },
-  { value: "Bad", label: "Bad" },
+  { value: "Poor", label: "Poor" },
 ];
 
 export default function PostPage() {
@@ -77,20 +76,6 @@ export default function PostPage() {
     } finally {
       setIsSubmitting(false);
     }
-
-    // const submitData = await fetch("/api/post", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   credentials: "include",
-    //   body: {
-    //     ...formData,
-    //     category: "66e095cf540d37233e3bbae7",
-    //     user: user._id,
-    //   },
-    // });
-    // console.log(submitData);
   };
 
   const customStyles = {
