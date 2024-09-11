@@ -58,7 +58,7 @@ router.post("/image", async (req, res) => {
   // }
 });
 
-router.get("/posts/", authMiddleware, async (req, res) => {
+router.get("/posts", authMiddleware, async (req, res) => {
   try {
     const userId = req.user.id;
     const posts = await getPostsByUserId(userId);

@@ -78,7 +78,7 @@ async function deletePostById(id) {
 
 async function getPostsByUserId(userId) {
   try {
-    return await Post.find({ user: userId }); // Ensure this matches your schema field
+    return await Post.find({ user: userId });
   } catch (error) {
     throw new Error("Error fetching posts: " + error.message);
   }

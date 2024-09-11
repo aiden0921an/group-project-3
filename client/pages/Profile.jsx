@@ -10,7 +10,7 @@ export default function Profile() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch("/api/posts/posts", {
+        const response = await fetch("/api/posts", {
           method: "GET",
           credentials: "include", // Include credentials for authentication
         });
