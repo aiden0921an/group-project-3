@@ -27,6 +27,7 @@ export default function Sidebar() {
           <NavDropdown.Item as={Link} to={`/category/${formatCategoryName("Automotive")}`}>Automotive</NavDropdown.Item>
           <NavDropdown.Item as={Link} to={`/category/${formatCategoryName("Books")}`}>Books</NavDropdown.Item>
           <NavDropdown.Item as={Link} to={`/category/${formatCategoryName("Real Estate")}`}>Real Estate</NavDropdown.Item>
+          <NavDropdown.Item as={Link} to={`/category/${formatCategoryName("Food & Beverages")}`}>Food & Beverages</NavDropdown.Item>
           <NavDropdown.Item as={Link} to={`/category/${formatCategoryName("Misc")}`}>Misc.</NavDropdown.Item>
         </NavDropdown>
       </Nav>
