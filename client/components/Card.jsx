@@ -50,7 +50,7 @@ const Card = ({ post }) => {
         <button onClick={handleBookmarkClick}>
           {isBookmarked ? "Remove Bookmark" : "Bookmark"}
         </button>
-        <button onClick={handleAddToCart}>Add to Cart</button>
+        {/* <button onClick={handleAddToCart}>Add to Cart</button> */}
       </div>
     </div>
   );
