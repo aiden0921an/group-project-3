@@ -16,7 +16,7 @@ export default function Header() {
           Meta Mart
         </Navbar.Brand>
         <div className="d-flex justify-content-center flex-grow-1">
-          <form
+          {/* <form
             className="d-flex input-group"
             style={{ maxWidth: "500px", width: "100%" }}
           >
@@ -34,7 +34,7 @@ export default function Header() {
             <span className="input-group-text border-0" id="search-addon">
               <i className="fas fa-search"></i>
             </span>
-          </form>
+          </form> */}
         </div>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
