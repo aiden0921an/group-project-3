@@ -150,6 +150,26 @@ button:hover {
   background-color: #444;
 }
 
+.no-items-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  min-height: 10vh;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.no-items-container p {
+  font-size: 1.2rem;
+  width: 100%;
+  margin: 5;
+  padding: 5;
+}
+
 input {
   background-color: #333;
   color: #f1f1f1;
