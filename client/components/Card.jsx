@@ -1,14 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSharedContext } from "../components/Bookmark";
 import "../App.css";
-import { useState } from "react";
 
 const Card = ({ post }) => {
   const navigate = useNavigate();
   const { bookmarkedItems, addBookmark, removeBookmark } = useSharedContext();
-
-  const [price, setPrice] = useState(post.price);
 
   const isBookmarked = bookmarkedItems.some(
     (bookmarkedPost) => bookmarkedPost._id === post._id
@@ -27,24 +24,12 @@ const Card = ({ post }) => {
     }
   };
 
-  const handleBuyNowClick = () => {
-    if (
-      window.SquarePayments &&
-      typeof window.SquarePayments.openPaymentForm === "function"
-    ) {
-      window.SquarePayments.openPaymentForm(price);
-    } else {
-      console.error("SquarePayments is not initialized.");
-    }
-  };
-
   return (
     <div className="card" onClick={handleCardClick}>
       <img src={post.imageUrl} alt={post.title} className="card-image" />
-
       <h2>{post.title}</h2>
       <p>{post.description}</p>
-      {/* <p>Category: {post.category.name}</p> */}
+      {<p>Category: {post.category.name}</p>}
       <p>Price: ${post.price}</p>
       {post.location && (
         <div className="card-location">
@@ -58,7 +43,6 @@ const Card = ({ post }) => {
         <button onClick={handleBookmarkClick}>
           {isBookmarked ? "Remove Bookmark" : "Bookmark"}
         </button>
-        <button onClick={handleBuyNowClick}>Buy Now</button>
       </div>
     </div>
   );
