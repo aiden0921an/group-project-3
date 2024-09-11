@@ -65,7 +65,6 @@ export default function PostPage() {
         credentials: "include",
 
         body: formDetails,
-
       });
       if (response.ok) {
         navigate("/");
@@ -140,13 +139,11 @@ export default function PostPage() {
 
   return (
     <>
-
       <form
-        class="post-form"
+        className="post-form"
         encType={"multipart/form-data"}
         onSubmit={handleSubmit}
       >
-
         <label>
           Title:
           <input
