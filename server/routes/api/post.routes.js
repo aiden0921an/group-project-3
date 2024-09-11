@@ -8,6 +8,7 @@ const {
   createPost,
   updatePostById,
   deletePostById,
+  getPostsByUserId,
   createPostWithImage,
 } = require("../../controllers/post.controller");
 
@@ -55,6 +56,16 @@ router.post("/image", async (req, res) => {
   // } catch (err) {
   //   res.status(500).json({ result: "error", payload: err.message });
   // }
+});
+
+router.get("/posts", authMiddleware, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const posts = await getPostsByUserId(userId);
+    res.json(posts);
+  } catch (err) {
+    res.status(500).json({ result: "error", payload: err.message });
+  }
 });
 
 router.post("/", handleFileUpload, async (req, res) => {
